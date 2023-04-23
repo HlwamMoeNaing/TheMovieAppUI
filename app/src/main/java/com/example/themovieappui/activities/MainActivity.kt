@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), BannerViewHolderDelegate, ShowCaseView
         setUpShowCaseRecyclerView()
         requestData()
 
-        Toast.makeText(this,"Hello MVVM",Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"Hello Viper",Toast.LENGTH_LONG).show()
     }
 
     private fun requestData() {
