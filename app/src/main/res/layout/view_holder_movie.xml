@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/width_movie_list"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_medium_2"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivMovieImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_movie_image"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/place_holder_banner" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvMovieName"
+        android:layout_below="@id/ivMovieImage"
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:textSize="@dimen/text_regular_2x"
+        android:text="Westword"
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvMovieRating"
+        android:layout_below="@id/tvMovieName"
+        android:layout_marginTop="@dimen/margin_small"
+        android:text="8.20"
+        android:textColor="@color/white"/>
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rbMovieRating"
+        android:progressTint="@color/colorAccent"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:numStars="5"
+        android:rating="5"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_below="@id/tvMovieName"
+        style="?attr/ratingBarStyleSmall"
+        android:layout_toEndOf="@id/tvMovieRating"/>
+
+
+
+
+
+</RelativeLayout>

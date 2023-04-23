@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ivBannerImage"
+        android:src="@drawable/place_holder_banner"
+        android:scaleType="centerCrop"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvBannerMovieName"
+        android:elevation="@dimen/margin_small"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="@dimen/margin_large"
+        android:layout_marginStart="@dimen/margin_medium_2"
+        android:text="The Wolverine 2013\n Offical Review"
+        android:textColor="@color/white"
+
+        android:textStyle="bold"
+        android:textSize="@dimen/text_heading_1x"/>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="@dimen/margin_xxlarge"
+            android:layout_height="@dimen/margin_xxlarge"
+            android:backgroundTint="@color/colorAccent"
+            style="@style/Widget.Material3.Button.Icon"
+            app:iconPadding="0dp"
+            android:insetBottom="0dp"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:insetTop="0dp"
+            app:cornerRadius="@dimen/margin_large"
+            android:layout_marginBottom="@dimen/margin_xlarge"
+            app:icon="@drawable/ic_baseline_play_arrow_24"/>
+    </FrameLayout>
+
+
+    <View
+        android:id="@+id/vGradient"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_banner" />
+
+
+
+
+
+</RelativeLayout>

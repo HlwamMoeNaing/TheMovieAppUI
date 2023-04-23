@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.themovieappui.viewpods.ActorListViewPod
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/margin_medium_2"
+    android:background="@color/colorPrimaryDark"
+    android:paddingTop="@dimen/margin_large">
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvBestActors"
+        android:text="@string/best_actors"
+        android:textColor="@color/colorSecondaryText"
+        android:layout_marginStart="@dimen/margin_medium_2"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvMoreActors"
+        android:textColor="@color/white"
+        android:text="@string/more_actors"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/margin_medium_2"
+        android:textStyle="bold"
+        android:layout_alignBaseline="@id/tvBestActors"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvBestActor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvBestActors"
+        android:layout_marginTop="@dimen/margin_card_medium_2"
+        android:paddingEnd="@dimen/margin_medium_2"
+        android:clipToPadding="false"/>
+
+
+
+
+</com.example.themovieappui.viewpods.ActorListViewPod>

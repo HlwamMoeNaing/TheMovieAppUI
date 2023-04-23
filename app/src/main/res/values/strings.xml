@@ -1,0 +1,222 @@
+<resources>
+    <string name="app_name">TheMovieAppUI</string>
+    <string name="ll_search">Search</string>
+    <string name="lbl_best_popular_film_and_series">BEST POPULAR FILMS AND SERIES</string>
+    <string name="check_movie_nshow_time">Check Movie\nShow Time</string>
+    <string name="see_more"><u>SEE MORE</u></string>
+    <string name="show_cases">Show Cases</string>
+    <string name="more_showcases"><u>MORE SHOWCASES</u></string>
+    <string name="_15_dec_2016">15 DEC 2016</string>
+    <string name="passengers">Passengers</string>
+    <string name="best_actors">Best Actors</string>
+    <string name="more_actors"><u>More Actors</u></string>
+    <string name="fantastic_title">Fantastic Beat and where to find them</string>
+    <string name="text_release_year">2016</string>
+    <string name="ll_storyline">STORYLINE</string>
+    <string name="ll_story_description">James "Jimmy" Howlett, also known as Logan or by his codename, The Wolverine, is a fictional character originating as the primary protagonist of 20th Century Fox\'s X-Men film series, and appearing in and the Marvel Cinematic Universe media franchise produced by Marvel Studios</string>
+    <string name="lbl_actors">ACTORS</string>
+    <string name="ll_creator">CREATORS</string>
+    <string name="ll_more_creators"><u>MORE CREATORS</u></string>
+    <string name="original_title">Original Title: </string>
+    <string name="lbl_type">Type:</string>
+    <string name="lbl_production">Production:</string>
+    <string name="lbl_description">Description:</string>
+    <string name="lbl_premier">Premier:</string>
+    <string name="lbl_premier_description">8 Nov 2016 ( World )</string>
+    <string name="lbl_about">ABOUT FILM</string>
+    <string name="ll_actor">ACTORS</string>
+    <string name="ll_more_actors">More Actors</string>
+
+
+    <string-array name="profession_list">
+        <item>ACCOUNTANT</item>
+        STUDENT OR UNIVERSITY STUDENT
+        <item>ACTOR/ACTRESS</item>
+        ACCOUNTANT
+        <item>ANIMATOR</item>
+        ACTOR/ACTRESS
+        <item>ARCHITECT</item>
+        ANIMATOR
+        <item>ATHELETIC</item>
+        ARCHITECT
+        <item>AUTHOR/WRITER</item>
+        ATHELETIC
+        <item>BAKER</item>
+        AUTHOR/WRITER
+        <item>BIOLOGIST</item>
+        BAKER
+        <item>BUILDER</item>
+        BIOLOGIST
+        <item>BUSINESS OWNER</item>
+        BUILDER
+        <item>BUTCHER</item>
+        BUTCHER
+        <item>CAREER COUNSELOR</item>
+        CAREER COUNSELOR
+        <item>CARETAKER/GUARD/SECURITY</item>
+        CARETAKER/GUARD/SECURITY
+        <item>CHEF</item>
+        CHEF
+        <item>CIVIL SERVANT</item>
+        CIVIL SERVANT
+        <item>CLERK</item>
+        CLERK
+        <item>COMIC BOOK WRITER</item>
+        COMIC BOOK WRITER
+        <item>COMPANY DIRECTOR</item>
+        COMPANY DIRECTOR
+        <item>COMPUTER PROGRAMMER</item>
+        COMPUTER PROGRAMMER
+        <item>COOK</item>
+        COOK
+        <item>DECORATOR</item>
+        DECORATOR
+        <item>DENTIST</item>
+        DENTIST
+        <item>DESIGNER</item>
+        DESIGNER
+        <item>DIPLOMAT</item>
+        DIPLOMAT
+        <item>DIRECTOR</item>
+        DIRECTOR
+        <item>DRESS MAKER/ TAILOR</item>
+        PHD DOCTOR
+        <item>DRIVER</item>
+        ECONOMISTS
+        <item>ECONOMISTS</item>
+        EDITOR
+        <item>EDITOR</item>
+        ENGINEER
+        <item>ELECTRICIAN</item>
+        EXECUTIVE
+        <item>EMPLOYEE/SERVANT</item>
+        FISHERMAN
+        <item>ENGINEER</item>
+        FISHMONGER
+        <item>EXECUTIVE</item>
+        GEOLOGIST
+        <item>FARMER</item>
+        HAIRDRESSER
+        <item>FILM DIRECTOR</item>
+        JOURNALIST
+        <item>FISHERMAN</item>
+        LAWYER
+        <item>FISHMONGER</item>
+        LEXICOGRAPHER
+        <item>FLIGHT ATTENDANT OR CABIN CREW</item>
+        MANAGER
+        <item>FLORIST</item>
+        MUSICIAN
+        <item>GEOLOGIST</item>
+        NURSE/MIDWIFE
+        <item>HAIRDRESSER</item>
+        PHOTOGRAPHER
+        <item>JEWELER</item>
+        POLICE OFFICER
+        <item>JOURNALIST</item>
+        PRINTER
+        <item>JUDGE</item>
+        PROFESSIONAL GAMBLER
+        <item>JUGGLER</item>
+        PUPPETEER
+        <item>LAWYER</item>
+        SAILOR
+        <item>LEXICOGRAPHER</item>
+        SCIENTIST
+        <item>LIBRARY ASSISTANT</item>
+        SHOP ASSISTANT
+        <item>MAKEUP ARTIST</item>
+        SINGER
+        <item>MANAGER</item>
+        SOLDIER
+        <item>MECHANIST</item>
+        TAILOR
+        <item>MEDICAL DOCTOR</item>
+        TRUCKER
+        <item>MEMBER OF RELIGIOUS ORDERS</item>
+        VETERINARIAN
+        <item>MUSICIAN</item>
+        VOLUNTEER
+        <item>NURSE/MIDWIFE</item>
+        ELECTRICIAN
+        <item>OPTICIAN</item>
+        FARMER
+        <item>PAINTER</item>
+        FILM DIRECTOR
+        <item>PERSONAL ASSISTANT</item>
+        FLIGHT ATTENDANT OR CABIN CREW
+        <item>PHD DOCTOR</item>
+        FLORIST
+        <item>PHOTOGRAPHER</item>
+        JEWELER
+        <item>PILOT</item>
+        JUDGE
+        <item>PLUMBER</item>
+        JUGGLER
+        <item>POLICE OFFICER</item>
+        LIBRARY ASSISTANT
+        <item>POLITICIANS</item>
+        MECHANIST
+        <item>PORTER</item>
+        MEDICAL DOCTOR
+        <item>PRINTER</item>
+        MEMBER OF RELIGIOUS ORDERS
+        <item>PRISON OFFICER / WARDER</item>
+        OPTICIAN
+        <item>PROFESSIONAL GAMBLER</item>
+        PAINTER
+        <item>PUBLISHER</item>
+        PILOT
+        <item>PUPPETEER</item>
+        PLUMBER
+        <item>RECEPTIONIST</item>
+        POLITICIANS
+        <item>SAILOR</item>
+        PRISON OFFICER / WARDER
+        <item>SALESPERSON</item>
+        PUBLISHER
+        <item>SCIENTIST</item>
+        RECEPTIONIST
+        <item>SECRETARY</item>
+        SALESPERSON
+        <item>SHOP ASSISTANT</item>
+        SECRETARY
+        <item>SIGN LANGUAGE INTERPRETER</item>
+        SIGN LANGUAGE INTERPRETER
+        <item>SINGER</item>
+        SURGEON
+        <item>SOLDIER</item>
+        TELEPHONE OPERATOR
+        <item>SOLICITORS</item>
+        TRANSLATOR
+        <item>STUDENT OR UNIVERSITY STUDENT</item>
+        TRAVEL AGENT
+        <item>SURGEON</item>
+        TV PRESENTER
+        <item>TAILOR</item>
+        WEB DESIGNER
+        <item>TEACHER/TRAINER</item>
+        BUSINESS OWNER
+        <item>TELEPHONE OPERATOR</item>
+        DRESS MAKER/ TAILOR
+        <item>TELEPHONIST</item>
+        DRIVER
+        <item>TRANSLATOR</item>
+        EMPLOYEE/SERVANT
+        <item>TRAVEL AGENT</item>
+        MAKEUP ARTIST
+        <item>TRUCKER</item>
+        PERSONAL ASSISTANT
+        <item>TV CAMERAMAN</item>
+        PORTER
+        <item>TV PRESENTER</item>
+        SOLICITORS
+        <item>VETERINARIAN</item>
+        TELEPHONIST
+        <item>VOLUNTEER</item>
+        OTHERS
+        <item>WEB DESIGNER</item>
+        TEACHER/TRAINER
+        <item>OTHERS</item>TV CAMERAMAN
+    </string-array>
+</resources>
