@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.themovieappui.R
 
@@ -19,6 +20,7 @@ import com.example.themovieappui.data.vos.model.MovieModel
 import com.example.themovieappui.delegate.BannerViewHolderDelegate
 import com.example.themovieappui.delegate.MovieViewHolderDelegate
 import com.example.themovieappui.delegate.ShowCaseViewHolderDelegate
+import com.example.themovieappui.mvvm.MainViewModel
 import com.example.themovieappui.viewpods.ActorListViewPod
 import com.example.themovieappui.viewpods.MovieListViewPod
 import com.google.android.material.tabs.TabLayout
@@ -31,97 +33,50 @@ class MainActivity : AppCompatActivity(), BannerViewHolderDelegate, ShowCaseView
     lateinit var mBestPopularMovieListViewPod: MovieListViewPod
     lateinit var mMovieByGenreViewPod: MovieListViewPod
     lateinit var mActorListViewPod: ActorListViewPod
-    private val mMovieModel: MovieModel = MovieModelImpl
-    private var mGenres: List<GenreVo>? = null
+//    private val mMovieModel: MovieModel = MovieModelImpl
+//    private var mGenres: List<GenreVo>? = null
+    private lateinit var mViewModel:MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setUpViewModel()
         setUpToolBar()
         setUpViewPod()
         setUpAdapter()
         //setUpGenreTabLayout()
         setUpListener()
         setUpShowCaseRecyclerView()
-        requestData()
+
+        observeLiveData()
 
         Toast.makeText(this,"Hello MVVM",Toast.LENGTH_LONG).show()
     }
 
-    private fun requestData() {
-        mMovieModel.getNowPlayingMovies {
-            showErrorToast(it)
-        }?.observe(this, Observer {
-            mAdapter.setData(it)
-        })
+    private fun setUpViewModel(){
+        mViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        mViewModel.getInitialData()
+    }
+    private fun observeLiveData(){
+        mViewModel.nowPlayingMovieLiveData?.observe(this,mAdapter::setData)
+        mViewModel.popularMovieLiveData?.observe(this,mBestPopularMovieListViewPod::setNewData)
+        mViewModel.topRatedMovieLiveData?.observe(this,mShowCaseAdapter::setNewData)
+        mViewModel.genresLiveData.observe(this,this::setUpGenreTabLayout)
+        mViewModel.movieBYgenreLiveData.observe(this,mMovieByGenreViewPod::setNewData)
+        mViewModel.actorsLiveData.observe(this,mActorListViewPod::setData)
+    }
 
-//        mMovieModel.getPopularMovies(
-//            onSuccess = {
-//                mBestPopularMovieListViewPod.setNewData(it)
-//            },
-//            onFailure = {
-//                showErrorToast(it)
-//            }
 //
-//        )
-        mMovieModel.getPopularMovies {
-            showErrorToast(it)
-        }?.observe(this, Observer {
-            mBestPopularMovieListViewPod.setNewData(it)
-        })
-
-
-//        mMovieModel.getTopRatedMovies(
+//
+//    private fun getMoviesByGenre(genreId: Int) {
+//        mMovieModel.getMovieByGenre(genreId = genreId.toString(),
 //            onSuccess = {
-//                mShowCaseAdapter.setNewData(it)
+//                Log.d("@genres", it.toString())
+//                mMovieByGenreViewPod.setNewData(it)
 //            },
 //            onFailure = {
 //                showErrorToast(it)
-//            }
-//        )
-
-        mMovieModel.getTopRatedMovies {
-            showErrorToast(it)
-        }?.observe(this, Observer {
-            mShowCaseAdapter.setNewData(it)
-        })
-
-        mMovieModel.getGenre(
-            onSuccess = {
-                mGenres = it
-                setUpGenreTabLayout(it)
-
-                // getMovie by genre
-                it.firstOrNull()?.id?.let { genreId ->
-                    getMoviesByGenre(genreId)
-                }
-            },
-            onFailure = {
-                showErrorToast(it)
-            }
-        )
-        mMovieModel.getActors(
-            onSuccess = {
-                mActorListViewPod.setData(it)
-
-
-                //  Log.d("testPrint", it[2].profilePath)
-            },
-            onFailure = {
-                showErrorToast(it)
-            }
-        )
-    }
-
-    private fun getMoviesByGenre(genreId: Int) {
-        mMovieModel.getMovieByGenre(genreId = genreId.toString(),
-            onSuccess = {
-                Log.d("@genres", it.toString())
-                mMovieByGenreViewPod.setNewData(it)
-            },
-            onFailure = {
-                showErrorToast(it)
-            })
-    }
+//            })
+//    }
 
 
     private fun setUpViewPod() {
@@ -145,9 +100,7 @@ class MainActivity : AppCompatActivity(), BannerViewHolderDelegate, ShowCaseView
         tabLayoutGenre.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
 //                Snackbar.make(window.decorView, tab?.text ?: "", Snackbar.LENGTH_LONG).show()
-                mGenres?.get(tab?.position ?: 0)?.id?.let {
-                    getMoviesByGenre(it)
-                }
+                mViewModel.getMovieByGenre(tab?.position ?: 0)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {

@@ -8,12 +8,14 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.themovieappui.R
 import com.example.themovieappui.data.model.MovieModelImpl
 import com.example.themovieappui.data.vos.GenreVo
 import com.example.themovieappui.data.vos.model.MovieModel
 import com.example.themovieappui.data.vos.model.MovieVo
+import com.example.themovieappui.mvvm.MovieDetailViewModel
 import com.example.themovieappui.util.URLConstant
 import com.example.themovieappui.viewpods.ActorListViewPod
 import kotlinx.android.synthetic.main.activity_movie_detail.*
@@ -23,7 +25,9 @@ import kotlinx.android.synthetic.main.view_holder_best_actors.view.*
 class MovieDetailActivity : AppCompatActivity() {
     lateinit var actorViewPod: ActorListViewPod
     lateinit var creatorViewPod: ActorListViewPod
-    private val mMovieModel: MovieModel = MovieModelImpl
+//    private val mMovieModel: MovieModel = MovieModelImpl
+
+    private lateinit var mViewModel:MovieDetailViewModel
 
 
     companion object {
@@ -38,14 +42,27 @@ class MovieDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
+
         setUpViewPod()
         setUpListener()
         val movieId = intent?.getIntExtra(EXTRA_MOVIE_ID, 0)
         movieId?.let {
-            requestData(it)
+          setUpViewModel(it)
         }
+        observeLiveData()
+    }
+    private fun observeLiveData(){
+        mViewModel.movieDetailLiveData?.observe(this){
+            it?.let { movie->bindData(movie) }
+        }
+        mViewModel.castLiveData.observe(this,actorViewPod::setData)
+        mViewModel.crewLiveData.observe(this,creatorViewPod::setData)
     }
 
+private fun setUpViewModel(movieId: Int){
+    mViewModel = ViewModelProvider(this)[MovieDetailViewModel::class.java]
+    mViewModel.getInitialData(movieId)
+}
 
     private fun setUpListener() {
         btnBack.setOnClickListener {
@@ -53,40 +70,7 @@ class MovieDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun requestData(movieId: Int) {
-//        mMovieModel.getMovieDetails(
-//            movieId = movieId.toString(),
-//            onSuccess = {
-//                bindData(it)
-//            },
-//            onFailure = {
-//                showErrorToast(it)
-//
-//            }
-//        )
 
-        mMovieModel.getMovieDetails(movieId.toString()) {
-            showErrorToast(it)
-        }?.observe(this, Observer {
-            it?.let { movieDetail -> bindData(movieDetail) }
-        })
-
-        mMovieModel.getCreditByMovie(
-
-            movieId = movieId.toString(),
-            onSuccess = {
-                Log.d("@mCrew", it.second.toString())
-                Log.d("@mCast", it.first.toString())
-                actorViewPod.setData(it.first)
-                creatorViewPod.setData(it.second)
-
-            },
-            onFailure = {
-                showErrorToast(it)
-            }
-        )
-
-    }
 
     private fun bindData(movieVo: MovieVo) {
         var releaseDate = ""
