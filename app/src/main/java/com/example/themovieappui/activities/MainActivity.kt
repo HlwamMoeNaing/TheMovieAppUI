@@ -25,6 +25,8 @@ import com.example.themovieappui.delegate.ShowCaseViewHolderDelegate
 import com.example.themovieappui.mvp.presenters.MainPresenter
 import com.example.themovieappui.mvp.presenters.MainPresenterImpl
 import com.example.themovieappui.mvp.views.MainView
+import com.example.themovieappui.router.navigateToMovieDetailActivity
+import com.example.themovieappui.router.navigateToSearchActivity
 import com.example.themovieappui.viewpods.ActorListViewPod
 import com.example.themovieappui.viewpods.MovieListViewPod
 import com.google.android.material.tabs.TabLayout
@@ -222,8 +224,8 @@ class MainActivity : AppCompatActivity(), MainView {
         val id = item.itemId
         if (id == R.id.menuSearch) {
             Toast.makeText(this, "clicked", Toast.LENGTH_LONG).show()
-            startActivity(MovieSearchActivity.newIntent(this))
-
+           // startActivity(MovieSearchActivity.newIntent(this))
+            navigateToSearchActivity()
             return true
         }
 
@@ -261,7 +263,8 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun navigateToMovieDetailScreen(movieId: Int) {
-        startActivity(MovieDetailActivity.newIntent(this, movieId = movieId))
+        //startActivity(MovieDetailActivity.newIntent(this, movieId = movieId))
+        navigateToMovieDetailActivity(movieId)
     }
 
     override fun showError(errorString: String) {

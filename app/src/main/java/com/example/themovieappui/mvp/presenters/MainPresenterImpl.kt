@@ -5,14 +5,17 @@ import androidx.lifecycle.ViewModel
 import com.example.themovieappui.data.model.MovieModelImpl
 import com.example.themovieappui.data.vos.GenreVo
 import com.example.themovieappui.data.vos.model.MovieModel
+import com.example.themovieappui.interactor.MovieInteractor
+import com.example.themovieappui.interactor.MovieInteractorImpl
 import com.example.themovieappui.mvp.views.MainView
+
 
 class MainPresenterImpl : ViewModel(), MainPresenter {
     //view
     var mView: MainView? = null
 
     //model
-    private val mMovieModel: MovieModel = MovieModelImpl
+    private val mMovieInteractor: MovieInteractor = MovieInteractorImpl
 
     //states
     private var mGenres: List<GenreVo>? = listOf()
@@ -24,27 +27,27 @@ class MainPresenterImpl : ViewModel(), MainPresenter {
 
     override fun onUiReady(owner: LifecycleOwner) {
         //NowPlaying
-        mMovieModel.getNowPlayingMovies {
+        mMovieInteractor.getNowPlayingMovies {
             mView?.showError(it)
         }?.observe(owner) {
             mView?.showNowPlayingMovies(it)
         }
 
         //Popular
-        mMovieModel.getPopularMovies {
+        mMovieInteractor.getPopularMovies {
             mView?.showError(it)
         }?.observe(owner) {
             mView?.showPopularMovies(it)
         }
         //TopRate
-        mMovieModel.getTopRatedMovies {
+        mMovieInteractor.getTopRatedMovies {
             mView?.showError(it)
         }?.observe(owner) {
             mView?.showTopRatedMovies(it)
         }
 
         //Genre and get movies for first Genre
-        mMovieModel.getGenre(onSuccess = {
+        mMovieInteractor.getGenre(onSuccess = {
             mGenres = it
             mView?.showGenre(it)
             it.firstOrNull()?.id?.let { firstGenreId ->
@@ -58,7 +61,7 @@ class MainPresenterImpl : ViewModel(), MainPresenter {
 
     override fun onTapGenre(genrePosition: Int) {
         mGenres?.getOrNull(genrePosition)?.id?.let { genreId ->
-            mMovieModel.getMovieByGenre(genreId = genreId.toString(), onSuccess = {
+            mMovieInteractor.getMovieByGenre(genreId = genreId.toString(), onSuccess = {
                 mView?.showMovieByGenre(it)
             }, onFailure = {
                 mView?.showError(it)

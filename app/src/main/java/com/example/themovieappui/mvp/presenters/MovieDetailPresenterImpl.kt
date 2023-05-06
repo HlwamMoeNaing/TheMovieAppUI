@@ -3,11 +3,12 @@ package com.example.themovieappui.mvp.presenters
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import com.example.themovieappui.data.model.MovieModelImpl
+import com.example.themovieappui.interactor.MovieInteractorImpl
 import com.example.themovieappui.mvp.views.MovieDetailView
 
 class MovieDetailPresenterImpl:ViewModel(),MovieDetailPresenter {
     //Model
-    private val mMovieModel = MovieModelImpl
+    private val mMovieDetailInteractor = MovieInteractorImpl
 
     //View
     private var mView:MovieDetailView? = null
@@ -18,7 +19,7 @@ class MovieDetailPresenterImpl:ViewModel(),MovieDetailPresenter {
 
     override fun onUiReadyInMovieDetail(owner: LifecycleOwner, movieId: Int) {
        //MovieDetail
-        mMovieModel.getMovieDetails(movieId.toString()){
+        mMovieDetailInteractor.getMovieDetails(movieId.toString()){
             mView?.showError(it)
         }?.observe(owner){
             it?.let {
@@ -27,7 +28,7 @@ class MovieDetailPresenterImpl:ViewModel(),MovieDetailPresenter {
         }
 
         //Credit
-        mMovieModel.getCreditByMovie(movieId = movieId.toString(), onSuccess = {
+        mMovieDetailInteractor.getCreditByMovie(movieId = movieId.toString(), onSuccess = {
             mView?.showCreditByMovie(cast = it.first, crew = it.second)
         }, onFailure = {
             mView?.showError(it)
