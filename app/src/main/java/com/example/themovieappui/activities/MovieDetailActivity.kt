@@ -29,8 +29,6 @@ import kotlinx.android.synthetic.main.view_holder_best_actors.view.*
 class MovieDetailActivity : AppCompatActivity(),MovieDetailView {
     lateinit var actorViewPod: ActorListViewPod
     lateinit var creatorViewPod: ActorListViewPod
-//    private val mMovieModel: MovieModel = MovieModelImpl
-
     private lateinit var mPresenter: MovieDetailPresenter
 
 
@@ -65,42 +63,6 @@ class MovieDetailActivity : AppCompatActivity(),MovieDetailView {
             super.onBackPressed()
         }
     }
-
-//    private fun requestData(movieId: Int) {
-////        mMovieModel.getMovieDetails(
-////            movieId = movieId.toString(),
-////            onSuccess = {
-////                bindData(it)
-////            },
-////            onFailure = {
-////                showErrorToast(it)
-////
-////            }
-////        )
-//
-//        mMovieModel.getMovieDetails(movieId.toString()) {
-//            showErrorToast(it)
-//        }?.observe(this, Observer {
-//            it?.let { movieDetail -> bindData(movieDetail) }
-//        })
-//
-//        mMovieModel.getCreditByMovie(
-//
-//            movieId = movieId.toString(),
-//            onSuccess = {
-//                Log.d("@mCrew", it.second.toString())
-//                Log.d("@mCast", it.first.toString())
-//                actorViewPod.setData(it.first)
-//                creatorViewPod.setData(it.second)
-//
-//            },
-//            onFailure = {
-//                showErrorToast(it)
-//            }
-//        )
-//
-//    }
-
     private fun bindData(movieVo: MovieVo) {
         var releaseDate = ""
         releaseDate = if (!movieVo.releaseDate.isNullOrEmpty() || movieVo.releaseDate != "") {
