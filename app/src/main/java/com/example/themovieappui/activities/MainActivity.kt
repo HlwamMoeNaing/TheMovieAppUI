@@ -38,21 +38,14 @@ class MainActivity : AppCompatActivity(), MainView {
     lateinit var mBestPopularMovieListViewPod: MovieListViewPod
     lateinit var mMovieByGenreViewPod: MovieListViewPod
     lateinit var mActorListViewPod: ActorListViewPod
-//    private val mMovieModel: MovieModel = MovieModelImpl
-//    private var mGenres: List<GenreVo>? = null
-
     private lateinit var mPresenter: MainPresenter
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setUpPresenter()
-
         setUpToolBar()
         setUpViewPod()
         setUpAdapter()
-        //setUpGenreTabLayout()
         setUpListener()
         setUpShowCaseRecyclerView()
 
@@ -64,84 +57,6 @@ class MainActivity : AppCompatActivity(), MainView {
         mPresenter = ViewModelProvider(this)[MainPresenterImpl::class.java]
         mPresenter.initView(this)
     }
-
-
-//    private fun requestData() {
-//        mMovieModel.getNowPlayingMovies {
-//            showErrorToast(it)
-//        }?.observe(this, Observer {
-//            mAdapter.setData(it)
-//        })
-//
-////        mMovieModel.getPopularMovies(
-////            onSuccess = {
-////                mBestPopularMovieListViewPod.setNewData(it)
-////            },
-////            onFailure = {
-////                showErrorToast(it)
-////            }
-////
-////        )
-//        mMovieModel.getPopularMovies {
-//            showErrorToast(it)
-//        }?.observe(this, Observer {
-//            mBestPopularMovieListViewPod.setNewData(it)
-//        })
-//
-//
-////        mMovieModel.getTopRatedMovies(
-////            onSuccess = {
-////                mShowCaseAdapter.setNewData(it)
-////            },
-////            onFailure = {
-////                showErrorToast(it)
-////            }
-////        )
-//
-//        mMovieModel.getTopRatedMovies {
-//            showErrorToast(it)
-//        }?.observe(this, Observer {
-//            mShowCaseAdapter.setNewData(it)
-//        })
-//
-//        mMovieModel.getGenre(
-//            onSuccess = {
-//                mGenres = it
-//                setUpGenreTabLayout(it)
-//
-//                // getMovie by genre
-//                it.firstOrNull()?.id?.let { genreId ->
-//                    getMoviesByGenre(genreId)
-//                }
-//            },
-//            onFailure = {
-//                showErrorToast(it)
-//            }
-//        )
-//        mMovieModel.getActors(
-//            onSuccess = {
-//                mActorListViewPod.setData(it)
-//
-//
-//                //  Log.d("testPrint", it[2].profilePath)
-//            },
-//            onFailure = {
-//                showErrorToast(it)
-//            }
-//        )
-//    }
-
-//    private fun getMoviesByGenre(genreId: Int) {
-//        mMovieModel.getMovieByGenre(genreId = genreId.toString(),
-//            onSuccess = {
-//                Log.d("@genres", it.toString())
-//                mMovieByGenreViewPod.setNewData(it)
-//            },
-//            onFailure = {
-//                showErrorToast(it)
-//            })
-//    }
-
 
     private fun setUpViewPod() {
         mBestPopularMovieListViewPod = vpBestPopularMovieList as MovieListViewPod
@@ -160,13 +75,8 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     private fun setUpListener() {
-        // Genre TabLayout Listener
         tabLayoutGenre.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-//                Snackbar.make(window.decorView, tab?.text ?: "", Snackbar.LENGTH_LONG).show()
-//                mGenres?.get(tab?.position ?: 0)?.id?.let {
-//                    getMoviesByGenre(it)
-//                }
                 mPresenter.onTapGenre(tab?.position ?: 0)
             }
 
@@ -201,11 +111,6 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     private fun setUpGenreTabLayout(genreList: List<GenreVo>) {
-//        dummyGenreList.forEach {
-//            val tab = tabLayoutGenre.newTab()
-//            tab.text = it
-//            tabLayoutGenre.addTab(tab)
-//        }
         genreList.forEach {
             tabLayoutGenre.newTab().apply {
                 text = it.name

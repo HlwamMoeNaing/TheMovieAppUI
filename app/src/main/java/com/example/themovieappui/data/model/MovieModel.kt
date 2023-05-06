@@ -8,28 +8,15 @@ import com.example.themovieappui.network.response.MovieListResponse
 import io.reactivex.rxjava3.core.Observable
 
 interface MovieModel {
-//    fun getNowPlayingMovies(
-//        onSuccess: (List<MovieVo>) -> Unit,
-//        onFailure: (String) -> Unit
-//    )
 
     fun getNowPlayingMovies(
         onFailure: (String) -> Unit
     ): LiveData<List<MovieVo>>?
 
-//    fun getTopRatedMovies(
-//        onSuccess: (List<MovieVo>) -> Unit,
-//        onFailure: (String) -> Unit
-//    )
-
     fun getTopRatedMovies(
         onFailure: (String) -> Unit
     ): LiveData<List<MovieVo>>?
 
-    //    fun getPopularMovies(
-//        onSuccess: (List<MovieVo>) -> Unit,
-//        onFailure: (String) -> Unit
-//    )
     fun getPopularMovies(
         onFailure: (String) -> Unit
     ): LiveData<List<MovieVo>>?
@@ -49,12 +36,6 @@ interface MovieModel {
         onSuccess: (List<ActorVo>) -> Unit,
         onFailure: (String) -> Unit
     )
-
-//    fun getMovieDetails(
-//        movieId:String,
-//        onSuccess: (MovieVo) -> Unit,
-//        onFailure: (String) -> Unit
-//    )
 
     fun getMovieDetails(
         movieId: String,
