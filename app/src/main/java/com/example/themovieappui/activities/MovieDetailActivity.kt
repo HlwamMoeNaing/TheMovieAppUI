@@ -8,22 +8,30 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.themovieappui.R
 import com.example.themovieappui.data.model.MovieModelImpl
+import com.example.themovieappui.data.vos.ActorVo
 import com.example.themovieappui.data.vos.GenreVo
 import com.example.themovieappui.data.vos.model.MovieModel
 import com.example.themovieappui.data.vos.model.MovieVo
+import com.example.themovieappui.mvp.presenters.IBasePresenter
+import com.example.themovieappui.mvp.presenters.MovieDetailPresenter
+import com.example.themovieappui.mvp.presenters.MovieDetailPresenterImpl
+import com.example.themovieappui.mvp.views.MovieDetailView
 import com.example.themovieappui.util.URLConstant
 import com.example.themovieappui.viewpods.ActorListViewPod
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import kotlinx.android.synthetic.main.view_holder_best_actors.view.*
 
 
-class MovieDetailActivity : AppCompatActivity() {
+class MovieDetailActivity : AppCompatActivity(),MovieDetailView {
     lateinit var actorViewPod: ActorListViewPod
     lateinit var creatorViewPod: ActorListViewPod
-    private val mMovieModel: MovieModel = MovieModelImpl
+//    private val mMovieModel: MovieModel = MovieModelImpl
+
+    private lateinit var mPresenter: MovieDetailPresenter
 
 
     companion object {
@@ -38,14 +46,19 @@ class MovieDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
+        setUpPresenter()
         setUpViewPod()
         setUpListener()
         val movieId = intent?.getIntExtra(EXTRA_MOVIE_ID, 0)
         movieId?.let {
-            requestData(it)
+           mPresenter.onUiReadyInMovieDetail(this,movieId)
         }
     }
 
+    fun setUpPresenter(){
+        mPresenter =ViewModelProvider(this)[MovieDetailPresenterImpl::class.java]
+        mPresenter.initView(this)
+    }
 
     private fun setUpListener() {
         btnBack.setOnClickListener {
@@ -53,40 +66,40 @@ class MovieDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun requestData(movieId: Int) {
-//        mMovieModel.getMovieDetails(
+//    private fun requestData(movieId: Int) {
+////        mMovieModel.getMovieDetails(
+////            movieId = movieId.toString(),
+////            onSuccess = {
+////                bindData(it)
+////            },
+////            onFailure = {
+////                showErrorToast(it)
+////
+////            }
+////        )
+//
+//        mMovieModel.getMovieDetails(movieId.toString()) {
+//            showErrorToast(it)
+//        }?.observe(this, Observer {
+//            it?.let { movieDetail -> bindData(movieDetail) }
+//        })
+//
+//        mMovieModel.getCreditByMovie(
+//
 //            movieId = movieId.toString(),
 //            onSuccess = {
-//                bindData(it)
+//                Log.d("@mCrew", it.second.toString())
+//                Log.d("@mCast", it.first.toString())
+//                actorViewPod.setData(it.first)
+//                creatorViewPod.setData(it.second)
+//
 //            },
 //            onFailure = {
 //                showErrorToast(it)
-//
 //            }
 //        )
-
-        mMovieModel.getMovieDetails(movieId.toString()) {
-            showErrorToast(it)
-        }?.observe(this, Observer {
-            it?.let { movieDetail -> bindData(movieDetail) }
-        })
-
-        mMovieModel.getCreditByMovie(
-
-            movieId = movieId.toString(),
-            onSuccess = {
-                Log.d("@mCrew", it.second.toString())
-                Log.d("@mCast", it.first.toString())
-                actorViewPod.setData(it.first)
-                creatorViewPod.setData(it.second)
-
-            },
-            onFailure = {
-                showErrorToast(it)
-            }
-        )
-
-    }
+//
+//    }
 
     private fun bindData(movieVo: MovieVo) {
         var releaseDate = ""
@@ -151,5 +164,22 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private fun showErrorToast(str: String) {
         Toast.makeText(this, str, Toast.LENGTH_LONG).show()
+    }
+
+    override fun showMovieDetail(movieVo: MovieVo) {
+       bindData(movieVo)
+    }
+
+    override fun showCreditByMovie(cast: List<ActorVo>, crew: List<ActorVo>) {
+     actorViewPod.setData(cast)
+        creatorViewPod.setData(crew)
+    }
+
+    override fun navigateBack() {
+      finish()
+    }
+
+    override fun showError(errorString: String) {
+        showErrorToast(errorString)
     }
 }
